@@ -1,0 +1,62 @@
+My Pitch Presentation
+========================================================
+author: Unai Esparza
+date: 2020.09.05
+autosize: true
+
+Scope
+========================================================
+
+- This is my presentation explaining the Shinny App I created for this project.
+
+- The App itself is available under the following link from the Shiny website: 
+
+  https://unai-esparza.shinyapps.io/myshinnyappproject/
+
+- The ui.R and server.R files are available in my GitHub repository under the following link:
+
+  https://github.com/UnaiEsparza/Developing-Data-Products-Course-Project-Shiny-Application-and-Reproducible-Pitch
+
+
+General description of the App
+========================================================
+
+- The airquality() dataset has been used.
+- Ozone level (output) is predicted based on Temperature (input selected by the user).
+- 3 linear models are used to predict the Ozone level, using different predictors (A: Temperature // B: Temperature and Solar Radiation // C: Temperature and Wind).
+- The result is an interactive plot showing the predicted Ozone values from each model correspondent to the selected Temperature value
+- The user can interactively show or hide all 3 linear models in the plot and submit the reactive calculation once the Temperature has been selected.
+
+Info about airquality() dataset
+========================================================
+
+See below an example of an R expression which is EVALUATED and DISPLAYED:
+
+```{r}
+summary(airquality)
+```
+
+Reactive expressions
+========================================================
+
+Additionally, see below some examples of reactive expressions contained in the App. If you want, you can check the complete ui.R and server.R files available in the aforementioned GitHub repo for additional details.
+
+```{r, eval=FALSE}
+
+    fitBpred <- reactive({
+        TempInput <- input$sliderTemp
+        predict(fitB, newdata = 
+                    data.frame(Temp = TempInput,
+                               Solar.R = ifelse(TempInput -20 > 0,
+                                              TempInput - 20, 0)))
+    })
+    
+    fitCpred <- reactive({
+        TempInput <- input$sliderTemp
+        predict(fitC, newdata = 
+                    data.frame(Temp = TempInput,
+                               Wind = ifelse(TempInput - 22 > 0,
+                                                TempInput - 22, 0)))
+    })
+    
+```
